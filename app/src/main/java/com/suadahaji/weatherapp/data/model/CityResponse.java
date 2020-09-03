@@ -20,7 +20,7 @@ public class CityResponse {
     @SerializedName("clouds")
     public Clouds clouds;
 
-    class Weather{
+    public class Weather{
         @SerializedName("id")
         public long id;
         @SerializedName("main")
@@ -30,7 +30,7 @@ public class CityResponse {
         @SerializedName("icon")
         public String icon;
     }
-    class MainTemperature {
+    public class MainTemperature {
         @SerializedName("temp_min")
         public float temp_min;
         @SerializedName("temp_max")
@@ -38,16 +38,16 @@ public class CityResponse {
         @SerializedName("pressure")
         public int pressure;
         @SerializedName("humidity")
-        public int humidity;
+        public float humidity;
     }
 
-    class Wind {
+    public class Wind {
         @SerializedName("speed")
         public float speed;
     }
 
-    class Clouds {
+    public class Clouds {
         @SerializedName("all")
-        public int all;
+        public float all;
     }
 }
