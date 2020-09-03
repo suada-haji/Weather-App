@@ -22,6 +22,7 @@
     <string name="cloud_coverage_format">
         Cloud Coverage: <xliff:g id="cloud">%1.0f</xliff:g>%%
     </string>
+    <string name="web_url">https://suada-haji.github.io/Weather-App/</string>
 
 
 </resources>
