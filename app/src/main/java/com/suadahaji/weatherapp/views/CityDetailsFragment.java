@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.suadahaji.weatherapp.R;
-import com.suadahaji.weatherapp.data.model.ForecastResponse;
+import com.suadahaji.weatherapp.data.model.CityResponse;
 import com.suadahaji.weatherapp.utils.Constants;
 
 import java.net.URL;
@@ -54,25 +54,25 @@ public class CityDetailsFragment extends Fragment {
         menu.clear();
     }
 
-    public class ForecastTask extends AsyncTask<URL, Void, ForecastResponse> {
+    public class ForecastTask extends AsyncTask<URL, Void, CityResponse> {
         @Override
-        protected ForecastResponse doInBackground(URL... urls) {
+        protected CityResponse doInBackground(URL... urls) {
             URL url = urls[0];
 
-            ForecastResponse forecastResponse = null;
+            CityResponse cityResponse = null;
             try {
                 String results = getResponseFromHttpUrl(url);
                 Gson gson = new GsonBuilder().create();
-                forecastResponse = gson.fromJson(results, ForecastResponse.class);
+                cityResponse = gson.fromJson(results, CityResponse.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return forecastResponse;
+            return cityResponse;
         }
 
         @Override
-        protected void onPostExecute(ForecastResponse forecastResponse) {
-            super.onPostExecute(forecastResponse);
+        protected void onPostExecute(CityResponse cityResponse) {
+            super.onPostExecute(cityResponse);
         }
     }
 }
