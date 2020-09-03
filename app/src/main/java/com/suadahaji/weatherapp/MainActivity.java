@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_help:
                 getFragment(new HelpFragment());
+                return true;
+            case R.id.action_settings:
+                Toast.makeText(this, "Coming Soon!", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
