@@ -1,16 +1,18 @@
 package com.suadahaji.weatherapp;
 
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-
 import com.suadahaji.weatherapp.views.CityListFragment;
+import com.suadahaji.weatherapp.views.HelpFragment;
 import com.suadahaji.weatherapp.views.MapFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_add_location:
                 getFragment(new MapFragment());
+                return true;
+            case R.id.action_help:
+                getFragment(new HelpFragment());
+                return true;
+            case R.id.action_settings:
+                Toast.makeText(this, "Coming Soon!", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
