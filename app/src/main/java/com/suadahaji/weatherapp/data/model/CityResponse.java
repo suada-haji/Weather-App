@@ -1,4 +1,4 @@
-package com.suadahaji.weatherapp.data;
+package com.suadahaji.weatherapp.data.model;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -22,13 +22,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.suadahaji.weatherapp.R;
-import com.suadahaji.weatherapp.data.CityResponse;
+import com.suadahaji.weatherapp.data.model.CityResponse;
 import com.suadahaji.weatherapp.data.database.DbContract;
 import com.suadahaji.weatherapp.data.database.DbHelper;
 
 import java.net.URL;
 
-import static com.suadahaji.weatherapp.utils.NetworkUtils.buildUrl;
+import static com.suadahaji.weatherapp.utils.NetworkUtils.buildUrlFromLatLng;
 import static com.suadahaji.weatherapp.utils.NetworkUtils.getResponseFromHttpUrl;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
@@ -64,7 +64,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onMapClick(LatLng latLng) {
         map.addMarker(new MarkerOptions().position(latLng));
-        new WeatherTask().execute(buildUrl(latLng));
+        new WeatherTask().execute(buildUrlFromLatLng(latLng));
     }
 
     @Override

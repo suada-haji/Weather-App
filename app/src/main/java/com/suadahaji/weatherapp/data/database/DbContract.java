@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 
-import com.suadahaji.weatherapp.data.CityResponse;
+import com.suadahaji.weatherapp.data.model.CityResponse;
 import com.suadahaji.weatherapp.utils.Constants;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class DbContract {
     private DbHelper dbHelper;
 
     private String[] columns = {
-            Constants.COLUMN_ID,
+            Constants.COLUMN_CITY_ID,
             Constants.COLUMN_WEATHER_DATE,
             Constants.COLUMN_DATE_BOOKMARKED,
             Constants.COLUMN_CITY_NAME
@@ -26,7 +26,7 @@ public class DbContract {
     public void bookmarkCity(CityResponse cityResponse) throws SQLException {
         if (!isCityBookmarked(cityResponse)) {
             ContentValues contentValues = new ContentValues();
-            contentValues.put(Constants.COLUMN_ID, cityResponse.id);
+            contentValues.put(Constants.COLUMN_CITY_ID, cityResponse.id);
             contentValues.put(Constants.COLUMN_WEATHER_DATE, cityResponse.dt);
             contentValues.put(Constants.COLUMN_DATE_BOOKMARKED, System.currentTimeMillis());
             contentValues.put(Constants.COLUMN_CITY_NAME, cityResponse.name);
@@ -60,7 +60,7 @@ public class DbContract {
     }
     public void deleteBookmarkedCity(CityResponse cityResponse) {
         String dbQuery = "DELETE FROM " + Constants.TABLE_NAME + " WHERE " +
-                Constants.COLUMN_ID + " = '" + cityResponse.id + "'";
+                Constants.COLUMN_CITY_ID + " = '" + cityResponse.id + "'";
         dbHelper.getDB().execSQL(dbQuery);
     }
 
@@ -78,7 +78,7 @@ public class DbContract {
     private CityResponse getFromCursor(Cursor cursor) {
         CityResponse city = new CityResponse();
 
-        city.id = cursor.getLong(cursor.getColumnIndexOrThrow(Constants.COLUMN_ID));
+        city.id = cursor.getLong(cursor.getColumnIndexOrThrow(Constants.COLUMN_CITY_ID));
         city.dt = cursor.getLong(cursor.getColumnIndexOrThrow(Constants.COLUMN_WEATHER_DATE));
         city.name = cursor.getString(cursor.getColumnIndexOrThrow(Constants.COLUMN_CITY_NAME));
         return city;

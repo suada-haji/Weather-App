@@ -6,7 +6,6 @@ import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.suadahaji.weatherapp.R;
 import com.suadahaji.weatherapp.adapters.CityListAdapter;
-import com.suadahaji.weatherapp.data.CityResponse;
 import com.suadahaji.weatherapp.data.database.DbContract;
 import com.suadahaji.weatherapp.data.database.DbHelper;
+import com.suadahaji.weatherapp.data.model.CityResponse;
+import com.suadahaji.weatherapp.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,17 @@ public class CityListFragment extends Fragment implements CityListAdapter.ItemCl
 
     @Override
     public void onCityClicked(CityResponse cityResponse) {
-        Toast.makeText(getActivity(), cityResponse.name, Toast.LENGTH_SHORT).show();
+        Bundle arguments = new Bundle();
+        arguments.putLong(Constants.COLUMN_CITY_ID, cityResponse.id);
+        arguments.putString(Constants.COLUMN_CITY_NAME, cityResponse.name);
+        CityDetailsFragment detailsFragment = new CityDetailsFragment();
+        detailsFragment.setArguments(arguments);
+        if (getFragmentManager() != null) {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, detailsFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
     @Override

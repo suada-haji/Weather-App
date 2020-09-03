@@ -17,7 +17,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String createTable = "CREATE TABLE IF NOT EXISTS " + Constants.TABLE_NAME + " (" +
-                Constants.COLUMN_ID + " INTEGER PRIMARY KEY, " +
+                Constants.COLUMN_CITY_ID + " INTEGER PRIMARY KEY, " +
                 Constants.COLUMN_WEATHER_DATE + "  TEXT,  " +
                 Constants.COLUMN_DATE_BOOKMARKED + "  DEFAULT CURRENT_TIMESTAMP,  " +
                 Constants.COLUMN_CITY_NAME + "  TEXT NOT NULL);";

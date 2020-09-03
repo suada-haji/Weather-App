@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.suadahaji.weatherapp.R;
-import com.suadahaji.weatherapp.data.CityResponse;
+import com.suadahaji.weatherapp.data.model.CityResponse;
 
 import java.util.List;
 
