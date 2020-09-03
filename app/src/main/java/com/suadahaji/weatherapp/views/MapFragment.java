@@ -1,5 +1,6 @@
 package com.suadahaji.weatherapp.views;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,7 +19,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.suadahaji.weatherapp.R;
+import com.suadahaji.weatherapp.data.CityResponse;
+import com.suadahaji.weatherapp.data.database.DbContract;
+import com.suadahaji.weatherapp.data.database.DbHelper;
+
+import java.net.URL;
+
+import static com.suadahaji.weatherapp.utils.NetworkUtils.buildUrl;
+import static com.suadahaji.weatherapp.utils.NetworkUtils.getResponseFromHttpUrl;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
     private GoogleMap map;
@@ -53,12 +64,35 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onMapClick(LatLng latLng) {
         map.addMarker(new MarkerOptions().position(latLng));
+        new WeatherTask().execute(buildUrl(latLng));
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
+    }
+
+    public class WeatherTask extends AsyncTask<URL, Void, CityResponse> {
+        @Override
+        protected CityResponse doInBackground(URL... urls) {
+            URL url = urls[0];
+
+            CityResponse weatherResponse = null;
+            try {
+                String results = getResponseFromHttpUrl(url);
+                Gson gson = new GsonBuilder().create();
+                weatherResponse = gson.fromJson(results, CityResponse.class);
+                DbHelper dbHelper = new DbHelper(getActivity());
+                DbContract dbContract = new DbContract(dbHelper);
+                if (!weatherResponse.name.isEmpty())
+                    dbContract.bookmarkCity(weatherResponse);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return weatherResponse;
+        }
     }
 }
 

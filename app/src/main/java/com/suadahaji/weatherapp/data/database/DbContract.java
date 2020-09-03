@@ -55,7 +55,6 @@ public class DbContract {
             cursor.close();
             return true;
         }
-
         cursor.close();
         return false;
     }
