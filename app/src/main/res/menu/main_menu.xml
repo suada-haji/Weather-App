@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_add_location"
+        android:title="@string/action_add_a_city"
+        android:icon="@drawable/ic_add_location"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_help"
+        android:title="@string/action_help"
+        android:icon="@drawable/ic_help"
+        />
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:icon="@drawable/ic_settings"
+        />
+</menu>
