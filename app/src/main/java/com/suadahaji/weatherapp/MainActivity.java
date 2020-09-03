@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle(R.string.app_name);
-        getFragment(new CityListFragment());
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new CityListFragment())
+                .commit();
     }
 
     @Override
