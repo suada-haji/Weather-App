@@ -60,7 +60,7 @@ public class DbContract {
     }
     public void deleteBookmarkedCity(CityResponse cityResponse) {
         String dbQuery = "DELETE FROM " + Constants.TABLE_NAME + " WHERE " +
-                Constants.COLUMN_CITY_NAME + " = '" + cityResponse.name + "'";
+                Constants.COLUMN_ID + " = '" + cityResponse.id + "'";
         dbHelper.getDB().execSQL(dbQuery);
     }
 

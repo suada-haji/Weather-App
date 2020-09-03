@@ -40,6 +40,14 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.CityVi
             }
         });
 
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                v.setSelected(true);
+                return listener.onCityLongClicked(cities.get(position));
+            }
+        });
+
     }
 
     @Override
@@ -49,6 +57,7 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.CityVi
 
     public interface ItemClickListener {
         void onCityClicked(CityResponse weatherResponse);
+        boolean onCityLongClicked(CityResponse weatherResponse);
     }
 
     class CityViewHolder extends RecyclerView.ViewHolder {
