@@ -41,8 +41,12 @@ public class CityListFragment extends Fragment implements CityListAdapter.ItemCl
         RecyclerView cityRecyclerView = view.findViewById(R.id.cityListRecycler);
         dbContract = new DbContract(new DbHelper(getActivity()));
         cities = dbContract.getAllCities();
-        adapter = new CityListAdapter(getActivity(), this, cities);
-        cityRecyclerView.setAdapter(adapter);
+        if (cities.size() == 0) {
+            view.findViewById(R.id.emptyList).setVisibility(View.VISIBLE);
+        } else {
+            adapter = new CityListAdapter(getActivity(), this, cities);
+            cityRecyclerView.setAdapter(adapter);
+        }
     }
 
     @Override

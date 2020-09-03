@@ -83,16 +83,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 String results = getResponseFromHttpUrl(url);
                 Gson gson = new GsonBuilder().create();
                 weatherResponse = gson.fromJson(results, CityResponse.class);
-                DbHelper dbHelper = new DbHelper(getActivity());
-                DbContract dbContract = new DbContract(dbHelper);
-                if (!weatherResponse.name.isEmpty())
-                    dbContract.bookmarkCity(weatherResponse);
+                bookmarkCity(weatherResponse);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return weatherResponse;
         }
+    }
+
+    private void bookmarkCity(CityResponse weatherResponse) {
+        DbHelper dbHelper = new DbHelper(getActivity());
+        DbContract dbContract = new DbContract(dbHelper);
+        if (!weatherResponse.name.isEmpty())
+            dbContract.bookmarkCity(weatherResponse);
     }
 }
 
