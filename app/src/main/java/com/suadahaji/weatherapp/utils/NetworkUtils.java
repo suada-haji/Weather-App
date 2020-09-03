@@ -13,7 +13,6 @@ import java.util.Scanner;
 
 public class NetworkUtils {
     public static String BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
-    public static String FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";
 
     private static final String units = "metric";
     private static final int numDays = 5;
@@ -42,7 +41,7 @@ public class NetworkUtils {
     }
 
     public static URL buildUrlFromCityId(long id) {
-        Uri weatherUri = Uri.parse(FORECAST_URL).buildUpon()
+        Uri weatherUri = Uri.parse(BASE_URL).buildUpon()
                 .appendQueryParameter(CITY_ID, String.valueOf(id))
                 .appendQueryParameter(UNITS_PARAM, units)
                 .appendQueryParameter(APPID_PARAM, BuildConfig.API_KEY)
